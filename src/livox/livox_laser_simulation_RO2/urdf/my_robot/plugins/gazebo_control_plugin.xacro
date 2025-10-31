@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+   <!-- 按需更改 名字 -->
+    <xacro:macro name="my_robot_ros2_control_planar">
+       
+        <ros2_control name="MyRobotPlanarSystem" type="system">
+            <hardware>
+                
+                <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+            </hardware>
+            
+        </ros2_control>
+
+        
+        <gazebo>
+        <!-- libgazebo_ros_planar_move.so 是 平面移动插件 -->
+            <plugin name="planar_move" filename="libgazebo_ros_planar_move.so">
+                
+                <ros>
+                    <namespace>/</namespace>
+                    <remapping>cmd_vel:=cmd_vel</remapping> 
+                    <remapping>odom:=odom</remapping>        
+                </ros>
+
+                <!-- 频率 -->
+                <update_rate>30</update_rate>  
+                <!-- 里程计frame id -->
+                <odometry_frame>odom</odometry_frame>   
+                  <!-- 是否发布里程计 -  -->
+                <publish_odom>false</publish_odom> 
+                <!-- 是否发布里程计tf -->
+                <publish_odom_tf>false</publish_odom_tf>
+                
+                <robot_base_frame>base_footprint</robot_base_frame>  
+                
+                <!-- 最大速度 -->
+                <max_vel_x>5.0</max_vel_x>                 
+                <max_vel_y>5.0</max_vel_y>                 
+                <max_vel_theta>3.14</max_vel_theta>        
+
+                <!-- 最大加速度 -->
+                <max_accel_x>3.0</max_accel_x>
+                <max_accel_y>3.0</max_accel_y>
+                <max_accel_theta>3.14</max_accel_theta>
+            </plugin>
+        </gazebo>
+    </xacro:macro>
+</robot>
+
+
+
+
+
+
+
+
+
+<!-- <?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="gazebo_planar_control_plugin">
+        <gazebo>
+        
+            <plugin name="planar_move" filename="libgazebo_ros_planar_move.so">
+                <ros>
+                    <namespace>/</namespace>
+                    <remapping>cmd_vel:=cmd_vel</remapping> 
+                  
+                </ros>
+                
+                <update_rate>30</update_rate>  
+
+                
+                <publish_odom>false</publish_odom>
+                
+                <publish_odom_tf>false</publish_odom_tf>
+
+
+                <robot_base_frame>base_footprint</robot_base_frame>  
+                
+                <max_vel_x>1.0</max_vel_x>    
+                <max_vel_y>1.0</max_vel_y>    
+                <max_vel_theta>1.57</max_vel_theta>  
+            </plugin>
+        </gazebo>
+    </xacro:macro>
+</robot>
+
+
+
+
+
+
+ -->
